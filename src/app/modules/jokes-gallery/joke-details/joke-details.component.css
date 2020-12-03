@@ -1,0 +1,14 @@
+.joke-card {
+    width: 850px;
+    overflow: hidden !important;
+}
+
+.pad
+{
+    padding-top: 3px;;
+}
+
+.mat-card-header-text
+{
+    margin: 0px !important;
+}
