@@ -5,19 +5,14 @@ import { JokesGalleryRoutingModule } from './jokes-gallery-routing.module';
 import { JokesGalleryComponent } from './jokes-gallery.component';
 import { DemoMaterialModule } from '../demo-material/demo-material.module';
 import { JokeDetailsComponent } from './joke-details/joke-details.component';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { FlagComponent } from './flag/flag.component';
 
 @NgModule({
-  declarations: [JokesGalleryComponent, JokeDetailsComponent],
+  declarations: [JokesGalleryComponent, JokeDetailsComponent, FlagComponent],
   imports: [
-    CommonModule,
+  CommonModule,
     JokesGalleryRoutingModule,
     DemoMaterialModule,
-    MatListModule,
-    MatButtonModule,
-    MatDialogModule
   ],
   entryComponents: [JokeDetailsComponent]
 })

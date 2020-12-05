@@ -93,6 +93,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // import {
 //   MatAutocompleteModule,
@@ -136,7 +141,7 @@ import { MatButtonModule } from '@angular/material/button';
      MatButtonModule,
     // MatButtonToggleModule,
      MatCardModule,
-    // MatCheckboxModule,
+     MatCheckboxModule,
     // MatChipsModule,
     // MatStepperModule,
     // MatDatepickerModule,
@@ -149,7 +154,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatListModule,
     // MatMenuModule,
     // MatNativeDateModule,
-    // MatPaginatorModule,
+    MatPaginatorModule,
     // MatProgressBarModule,
     // MatProgressSpinnerModule,
     // MatRadioModule,
@@ -158,9 +163,9 @@ import { MatButtonModule } from '@angular/material/button';
     // MatSidenavModule,
     // MatSliderModule,
     // MatSlideToggleModule,
-    // MatSnackBarModule,
-    // MatSortModule,
-    // MatTableModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
     // MatTabsModule,
     MatToolbarModule,
     // MatTooltipModule,

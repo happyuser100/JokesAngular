@@ -1,52 +1,42 @@
-<H1>Joke Details</H1>
+<mat-toolbar color="primary">
+  <span>JOKE DETAILS</span>
+
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+</mat-toolbar>
+
 <mat-dialog-content>
-    <mat-card class="joke-card">
-        <mat-card-header>
-          <mat-card-title>
-              {{joke.setup}}
-              {{joke.joke}}
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="pad">
-              Category: {{joke.category}}
-          </div>
-          <div class="pad">
-              Type: {{joke.type}}
-          </div>
-          <div class="pad">
-              Dellivery: {{joke.delivery}}
-          </div>         
+  <mat-card class="joke-card">
+    <mat-card-header>
+      <mat-card-title>
+        {{ joke?.setup }}
+        {{ joke?.joke }}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="itemPadding">Category: {{ joke?.category }}</div>
+      <div class="itemPadding">Type: {{ joke?.type }}</div>
+      <div class="itemPadding">Dellivery: {{ joke?.delivery }}</div>
 
-          <div>
-            <mat-nav-list class="joke-list">
-                <mat-list-item *ngFor="let flag of flags">
-                        {{flag.nsfw}}
-                        {{flag.religious}}
-                </mat-list-item>
-            </mat-nav-list>
-            
-          </div>
+      <div>
+        <app-flag [flags]="flags"></app-flag>
+      </div>
 
-          <div>
-            <mat-nav-list class="joke-list">
-                <mat-list-item *ngFor="let jokeItem of jokesOfTypeSelected">
-                    <div class="pad">
-                        {{jokeItem.setup }}
-                        {{jokeItem.joke}}
-                    </div>   
-                </mat-list-item>
-            </mat-nav-list>
-
-          </div>  
-
-
-    
-        </mat-card-content>
-      </mat-card>      
+      <div>
+        <mat-list>
+          <mat-list-item *ngFor="let jokeItem of jokesOfTypeSelected">
+            <div class="pad">
+              {{ jokeItem?.setup }}
+              {{ jokeItem?.joke }}
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </mat-dialog-content>
-    
- <mat-dialog-actions>
-        <button mat-raised-button color="primary" (click)="close()">Close</button>
-</mat-dialog-actions>
 
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="close()">Close</button>
+</mat-dialog-actions>

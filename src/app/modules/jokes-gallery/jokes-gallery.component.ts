@@ -1,87 +1,61 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { MatDialog } from '@angular/material/dialog';
-import { JokeDetailsComponent } from './joke-details/joke-details.component';
-import { DialogData } from './models/dialog-data';
-import { JokesService } from './services/jokes.service';
+import { MatDialog } from "@angular/material/dialog";
+import { JokeDetailsComponent } from "./joke-details/joke-details.component";
+import { DialogData } from "./models/dialog-data";
+import { JokesService } from "./services/jokes.service";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatSort } from "@angular/material/sort";
+import { JokeObject } from "./models/joke-object";
+import { MatPaginator } from "@angular/material/paginator";
 
 @Component({
   selector: "app-jokes-gallery",
   templateUrl: "./jokes-gallery.component.html",
   styleUrls: ["./jokes-gallery.component.css"],
 })
-export class JokesGalleryComponent implements OnInit {
-  typesOfShoes: string[] = [
-    "Boots",
-    "Clogs",
-    "Loafers",
-    "Moccasins",
-    "Sneakers",
-  ];
-
-  constructor(private router: Router,private dialog: MatDialog,
-    private jokesService: JokesService) {}
+export class JokesGalleryComponent implements OnInit, AfterViewInit {
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private jokesService: JokesService
+  ) {}
 
   data: any[] = [];
-  jokes: any[] = [];
+  jokes: JokeObject[] = [];
+  listData: MatTableDataSource<JokeObject>;
+  displayedColumns: string[] = ["id", "setup", "joke", "type", "category", "error", "actions"];
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   ngOnInit(): void {
-
-     this.jokesService.getJokes().subscribe((x) =>
-     {
-       this.jokes = JSON.parse(JSON.stringify(x));
-       debugger
-     }
-     );
-
-    for (let i = 1; i <= 10; i++) {
-      const item = {
-        id: i,
-        name: `Person ${i}`,
-        email: `person${i}@gmail.com`,
-      };
-
-      this.data.push(item);
-    }
+    this.jokesService.getJokes().subscribe((x) => {
+      this.jokes = JSON.parse(JSON.stringify(x));
+      this.listData = new MatTableDataSource(this.jokes);
+      this.listData.sort = this.sort;
+      this.listData.paginator = this.paginator;
+    });
   }
 
-  goToJoke(joke)
-  {
-    debugger;
-    //this.router.navigate(["jokes", item.id]);
-    const dialogData:  DialogData = 
-    {
-      id: joke.id
-    };
-        
-    const dialogRef = this.dialog.open(JokeDetailsComponent, {
-      width: '850px',
-      height: '500px',
-      data: dialogData
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      debugger
-    });
-
+  ngAfterViewInit(): void {
+    // this.listData.sort = this.sort;
+    // this.listData.paginator = this.paginator;
   }
 
-  goToChat(item) {
+  details(row: JokeObject) {
     debugger;
-    //this.router.navigate(["jokes", item.id]);
-    const dialogData:  DialogData = 
-    {
-      id: item.id
+    const dialogData: DialogData = {
+      id: row.id,
     };
-        
+
     const dialogRef = this.dialog.open(JokeDetailsComponent, {
-      width: '500px',
-      height: '500px',
-      data: dialogData
+      width: "900px",
+      height: "750px",
+      data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      debugger
+    dialogRef.afterClosed().subscribe((result) => {
+      debugger;
     });
   }
 }

@@ -1,41 +1,70 @@
-<!-- <mat-selection-list #shoes [multiple]="false">
-    <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
-      {{shoe}}
-    </mat-list-option>
-  </mat-selection-list> -->
+<mat-toolbar color="primary">
+  <span>JOKES</span>
+</mat-toolbar>
 
-  <!-- <mat-nav-list class="conversation-list">
-    <mat-list-item *ngFor="let item of data">
-        <a (click)="goToChat(item)">{{item.name}}</a>
-    </mat-list-item>
-</mat-nav-list> -->
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="listData" matSort>
+    <ng-container matColumnDef="id">
+      <mat-header-cell [ngClass]="'w-75'" *matHeaderCellDef mat-sort-header
+        >Id</mat-header-cell
+      >
+      <mat-cell [ngClass]="'w-75'" *matCellDef="let element">{{
+        element.id
+      }}</mat-cell>
+    </ng-container>
 
-<H1>Jokes</H1>
+    <ng-container matColumnDef="setup">
+      <mat-header-cell [ngClass]="'w-400'" *matHeaderCellDef mat-sort-header
+        >Setup</mat-header-cell
+      >
+      <mat-cell [ngClass]="'w-400'" *matCellDef="let element">{{
+        element.setup
+      }}</mat-cell>
+    </ng-container>
 
-<mat-nav-list class="jokes-list">
-    <mat-list-item *ngFor="let joke of jokes">
-        <a (click)="goToJoke(joke)">
-            {{joke.setup}}
-            {{joke.joke}}
-        </a>
-    </mat-list-item>
-</mat-nav-list>
+    <ng-container matColumnDef="joke">
+      <mat-header-cell [ngClass]="'w-400'" *matHeaderCellDef mat-sort-header
+        >Joke</mat-header-cell
+      >
+      <mat-cell [ngClass]="'w-400'" *matCellDef="let element">{{
+        element.joke
+      }}</mat-cell>
+    </ng-container>
 
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.type }}</mat-cell>
+    </ng-container>
 
-  <!-- <mat-nav-list>
-    <mat-list-item (click)="menuTrigger.openMenu()" *ngFor="let i of data">
-        <div mat-line>
-            {{ i.name }}
-        </div>
-        <p mat-line>
-            {{ i.email }}
-        </p>
-        <button mat-icon-button #menuTrigger="matMenuTrigger"  [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
- </button>
-    </mat-list-item>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item>View profile</button>
-        <button mat-menu-item>Add contact</button>
-    </mat-menu>
-</mat-nav-list> -->
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Category</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">{{ element.category }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="error">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Error</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-checkbox [value]="element.error"> </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="details(row)">
+          <mat-icon>details</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    [pageSize]="5"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
